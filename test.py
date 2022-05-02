@@ -14,17 +14,17 @@ class DBooksTestCase(unittest.TestCase):
 
 
     def test_recents(self):
-        self.assertIsInstance(self.dbooks, DBooks, 'Class instantiated.')
-        self.assertIsNotNone(self.dbooks.books, 'books is not None.')
-        self.assertIsInstance(self.recents, dict, 'Recents correctly obtain.')
+        self.assertIsInstance(self.dbooks, DBooks)
+        self.assertIsNotNone(self.dbooks.books)
+        self.assertIsInstance(self.recents, dict)
 
 
     def test_search(self):
-        self.assertIsInstance(self.search, dict, 'Search result store correctly.')
+        self.assertIsInstance(self.search, dict)
 
 
     def test_details(self):
-        self.assertIsInstance(self.details, dict, 'Book detail correctly obtain.')
+        self.assertIsInstance(self.details, dict)
 
 
     def test_version(self):
