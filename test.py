@@ -1,38 +1,36 @@
+import unittest
 from libdbooks import DBooks
-from pprint import pp
 
 
 
-db = DBooks()
+class DBooksTestCase(unittest.TestCase):
 
-def main():
-
-    # Query for recent uploaded books
-    r = db.get_recents_books()
-
-    # Print the nomber of books return
-    print(r.get('total'))
-
-    # Query for search term, python in this example
-    s = db.search_book('python')
-
-    # Print total number of books found in query
-    print('Total books:',s['total'])
-
-    # Show books title and url...
-    for x in s['books']:
-        print(x['title'])
-        print(x['url'])
-        print('+' + '-----'*20 + '+')
+    def setUp(self):
+        self.dbooks = DBooks()
+        self.recents = self.dbooks.get_recents_books()
+        self.search = self.dbooks.search_book('vim')
+        self.details = self.dbooks.get_book_details('1530051126')
+        self.version = self.dbooks.get_version()
 
 
-    # Pretty print specific book details, as a formatted string, losing
-    # dictionaries advantages
-    d = db.get_book_details('1530051126')
-    pp(d)
+    def test_recents(self):
+        self.assertIsInstance(self.dbooks, DBooks, 'Class instantiated.')
+        self.assertIsNotNone(self.dbooks.books, 'books is not None.')
+        self.assertIsInstance(self.recents, dict, 'Recents correctly obtain.')
 
+
+    def test_search(self):
+        self.assertIsInstance(self.search, dict, 'Search result store correctly.')
+
+
+    def test_details(self):
+        self.assertIsInstance(self.details, dict, 'Book detail correctly obtain.')
+
+
+    def test_version(self):
+        self.assertIsNotNone(self.version)
 
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
 
